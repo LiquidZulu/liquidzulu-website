@@ -8,6 +8,7 @@
   "dependencies": {
     "bulma": "^0.7.5",
     "cookie-parser": "^1.4.4",
+    "csso": "^3.5.1",
     "express": "^4.17.0",
     "node-sass": "^4.12.0"
   }
