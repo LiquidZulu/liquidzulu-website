@@ -1,0 +1,142 @@
+{
+    "i":    "./public/html.js",
+    "MIME": "text/html",
+
+    "/css": {
+
+        "/css.main": {
+            "i":    "./css/main.css",
+            "MIME": "application/css"
+        }
+
+    },
+
+    "/pics": {
+
+        "/face.logo": {
+
+            "/svg": {
+                "i":    "./pics/face_logo/i.svg",
+                "MIME": "image/svg+xml"
+            },
+
+            "/png": {
+                "i":    "./pics/face_logo/i.png",
+                "MIME": "image/png"
+            }
+
+        }
+
+    },
+
+    "/js": {
+        "/all": {
+            "i":    "./js/all.js",
+            "MIME": "text/javascript"
+        },
+        "/music": {
+            "i":    "./js/music.js",
+            "MIME": "text/javascript"
+        },
+        "/color": {
+            "i":    "./js/Color.js",
+            "MIME": "text/javascript"
+        }
+    },
+
+    "/wavesurfer": {
+        "/min.js": {
+            "i":    "./wavesurfer-src/wavesurfer.min.js",
+            "MIME": "text/javascript"
+        }
+    },
+
+    "/music": {
+        "i":    "./public/music/html.js",
+        "MIME": "text/html"
+    },
+
+    "/songs": {
+        
+        "/rage-room": {
+            "i":    "./data/songs/rage-room/i.flac",
+            "MIME": "audio/flac",
+
+            "/art": {
+                "i":    "./data/songs/rage-room/i.png",
+                "MIME": "img/png"
+            },
+
+            "/wav": {
+                "i":    "./data/songs/rage-room/i.flac",
+                "MIME": "audio/wav"
+            },
+
+            "/src": {
+                "i":    "./data/songs/rage-room/i.flp",
+                "MIME": "application/flp"
+            }
+        }
+    },
+
+    "/CreativeButtons": {
+
+        "/.css": {
+            "/component.css": {
+                "i":    "./CreativeButtons/css/component.css",
+                "MIME": "application/css"
+            },
+            "/default.css": {
+                "i":    "./CreativeButtons/css/default.css",
+                "MIME": "application/css"
+            }
+        },
+
+        "/.js": {
+            "/modernizr.custom.js": {
+                "i":    "./CreativeButtons/js/modernizr.custom.js",
+                "MIME": "text/javascript"
+            }
+        }
+    },
+
+    "/CreativeLinkEffects": {
+
+        "/.css": {
+            "/component.css": {
+                "i":    "./CreativeLinkEffects/css/component.css",
+                "MIME": "application/css"
+            },
+            "/normalize.css": {
+                "i":    "./CreativeLinkEffects/css/normalize.css",
+                "MIME": "application/css"
+            }
+        },
+
+        "/.js": {
+            "/modernizr.custom.js": {
+                "i":    "./CreativeButtons/js/modernizr.custom.js",
+                "MIME": "text/javascript"
+            }
+        }
+    },
+
+    "/minibar": {
+
+        "/.css": {
+            "i":    "./MiniBar/i.css",
+            "MIME": "application/css"
+        },
+
+        "/.js": {
+            "i":    "./MiniBar/i.js",
+            "MIME": "text/javascript"
+        }
+    },
+
+    "/fontawesome": {
+        "/*": {
+            "MIME": ""
+        }
+    }
+}

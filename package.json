@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "start": "node server.js",
+    "css-build": "node-sass --omit-source-map-url sass/mystyles.scss css/main.css"
+  },
+  "name": "liquidzulu.xyz",
+  "version": "0.0.1",
+  "dependencies": {
+    "bulma": "^0.7.5",
+    "cookie-parser": "^1.4.4",
+    "express": "^4.17.0",
+    "node-sass": "^4.12.0"
+  }
+}

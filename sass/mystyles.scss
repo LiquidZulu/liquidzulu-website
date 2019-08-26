@@ -1,0 +1,221 @@
+@charset "utf-8";
+
+
+// Update some of Bulma's component variables
+$body-background-color: #ffffff;
+$control-border-width: 2px;
+$input-border-color: transparent;
+$input-shadow: none;
+
+$nice-color-1:  #0e83cd;
+$nice-color-2:  #f06060;
+$nice-color-3:  #fcd04b;
+$nice-color-4:  #2ecc71;
+$nice-color-5:  #9e54bd;
+$nice-color-6:  #4593e3;
+$nice-color-7:  #2ac56c;
+$nice-color-8:  #ecf0f1;
+$nice-color-9:  #435a6b;
+$nice-color-10: #f39c12;
+$nice-color-11: #cd4436;
+$nice-color-12: #f19f0f;
+$nice-color-13: #3fa46a;
+$nice-color-14: #9e487f;
+$nice-color-15: #16a085;
+$nice-color-16: #aab7b7;
+
+$nice-colors: ($nice-color-1 $nice-color-2 $nice-color-3 $nice-color-4 $nice-color-5 $nice-color-6 $nice-color-7 $nice-color-8 $nice-color-9 $nice-color-10 $nice-color-11 $nice-color-12 $nice-color-13 $nice-color-14 $nice-color-15 $nice-color-16);
+
+$media-content-width: 70vh;
+
+@for $i from 1 through 16{
+    &.color-#{$i}{
+        background: nth($nice-colors, $i)
+    }
+}
+
+html{
+    min-width:  100vw;
+    overflow-x: visible;
+    overflow-y: visible;
+    &.script-enabled{
+        overflow-x: hidden !important;
+        overflow-y: hidden !important;
+        .section{
+            height: 80vh !important;
+        }
+    }
+
+    
+    #section-0 > a > img{
+        height: 21em;
+        margin-top: 7em;
+        margin-bottom: -1em;
+    }
+
+    .section{
+        height: 100vh;
+        font-size: 2vh;
+    }
+}
+::-webkit-scrollbar {
+    display: none;
+}
+
+// Import only what you need from Bulma
+@import "../node_modules/bulma/sass/utilities/_all.sass";
+@import "../node_modules/bulma/sass/base/_all.sass";
+// @import "../node_modules/bulma/sass/elements/button.sass";
+// @import "../node_modules/bulma/sass/elements/container.sass";
+// @import "../node_modules/bulma/sass/elements/form.sass";
+// @import "../node_modules/bulma/sass/elements/title.sass";
+// @import "../node_modules/bulma/sass/components/navbar.sass";
+// @import "../node_modules/bulma/sass/layout/hero.sass";
+@import "../node_modules/bulma/sass/layout/section.sass";
+@import "../node_modules/bulma/sass/layout/footer.sass";
+@import "../node_modules/bulma/sass/components/media.sass";
+
+h1{
+    color: #979797;
+    text-transform: uppercase;
+    font-size: 3em;
+    margin: 0;
+}
+h2{
+    color: #b7b7b7;
+    font-size: 1.5em;
+    margin: 0;
+    margin-top: 0.25em;
+}
+
+.container {
+    width: 100vw;
+}
+
+::selection {
+    background: rgba(92, 92, 92, 0.3);
+}
+::-moz-selection {
+    background: rgba(92, 92, 92, 0.3);
+}
+
+section{
+
+    &.light-text{
+        h1{
+            color: #f0f0f0
+        }
+        h2{
+            color: #dfdfdf
+        }
+        a{
+            color: #cacaca
+        }
+    }
+
+    &.light-text.color-2{
+        h1{
+            color: #fff
+        }
+        h2{
+            color: #dfdfdf
+        }
+        a{
+            color: #cacaca
+        }
+    }
+
+    &.spaced-text{
+        h1{
+            margin-top: 25vh;
+        }
+    }
+
+    &.color-3{
+        & > h1 {
+            color: #666
+        }
+        & > h2 {
+            color: #737373
+        }
+        & > nav {
+            & > a {
+                color: #8A8A8A
+            }
+        }
+    }
+
+    @for $i from 1 through 16{
+        &.color-#{$i}{
+            $thecolor: nth($nice-colors, $i);
+            $inverted: invert($thecolor);
+            $computed-color: hsla(hue($inverted), saturation($inverted), lightness($thecolor), 0.6);
+            & *::selection {
+                background: $computed-color;
+                color: $thecolor
+            }
+            & *::-moz-selection {
+                background: $computed-color;
+                color: $thecolor
+            }
+        }
+    }
+}
+
+div.container > section.section nav{
+    display: inline-block;
+}
+
+nav > a {
+    font-size: 1em;
+}
+
+.cl-effect-9 a {
+    margin: 0px 2px;
+    padding: 1px 3px;
+    text-transform: none;
+}
+
+.media.music{
+
+    .media-left{
+
+        padding: 0;
+        margin-right: 1vh;
+
+        & > p > img{
+            max-height: 19vh !important;
+        }
+
+        & > i{
+            display: inline-block;
+        }
+    }
+
+    .media-content{
+
+        padding: 0;
+        width: $media-content-width;
+
+        .cont{
+
+            p{
+                width: $media-content-width;
+                text-align: justify;
+                padding: 1vh;
+            }
+
+            div{
+                width: $media-content-width;
+
+                wave{
+                    width: $media-content-width;
+
+                    & > canvas{
+                        width: $media-content-width;
+                    }
+                }
+            }
+        }
+    }
+}
