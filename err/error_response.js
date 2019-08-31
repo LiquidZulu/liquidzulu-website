@@ -93,11 +93,11 @@ module.exports = class errResponse {
           code: this.response.code,
           title: this.title,
           css: {
-            href: 'https://garfield-comics.glitch.me/style.css',
+            href: './css/css.main',
             code: ''
           },
           icon: {
-            href: 'http://media.liquidzulu.xyz/garf/GarfieldOnlyThirdPanel.png',
+            href: './pics/face.logo/svg',
             MIME: 'image/png'
           },
           home: '../',

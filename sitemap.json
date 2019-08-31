@@ -5,7 +5,7 @@
     "/css": {
 
         "/css.main": {
-            "i":    "./css/main.css",
+            "i":    "./css/main.min.css",
             "MIME": "application/css"
         }
 
@@ -53,6 +53,11 @@
 
     "/music": {
         "i":    "./public/music/html.js",
+        "MIME": "text/html"
+    },
+
+    "/social": {
+        "i":    "./public/social/html.js",
         "MIME": "text/html"
     },
 

@@ -1,30 +1,83 @@
 /**
+ * @copyright LiquidZulu (c) 2019-present | This is only for documentation purposes, see legal/LICENSE.html for legal info.
+ * @author    LiquidZulu
+ * @license   CC-BY-NC-SA-4.0
+ */
+
+/**
+ * @todo make css minifier recursively minify all files.
+ * @todo finish adding music to music,js
+ * @todo Add @argv to JSDoc
+ */
+
+/**
  * @argv {String|Number}randy - A highly entropic seed for the randy, recommend button mashed string or true random.
  * @argv {Number}port         - The port to run the server on, defaults to 8080.
  * @argv {String}root         - The root directory of the server, set a default in ENV.
  * @argv {Number}randy-len    - the length that the final generated randy should be, defaults to 1024
  */
 
-/**
+"use strict"
+
+/** 
  * @interface HTTPerr      - A Class that holds info on a HTTP error.
- * @interface Express      - A Function that allows for interacting with the Express module.
- * @interface cookieParser - A middleware for Express that allows for the use of cookies.
- * @interface md5          - A function to quickly calculate MD5 hashes, dont worry im not storing passwords with md5 just need a quick way to convert randy seed to a number.
- * @interface argv         - An object that holds formatted cli arguments through the use of yargs.
- * @interface app          - The current Express instance.
+ * @constant  {HTTPerr} 
+ * @author    LiquidZulu
  */
+const HTTPerr = require('./err/error_response.js');
 
-const HTTPerr      = require('./err/error_response.js');
-const Express      = require('express');
+/** 
+ * @interface Express      - A Function that allows for interacting with the Express module.
+ * @constant  {Express} 
+ * @author    LiquidZulu
+ */
+const Express = require('express');
+
+/** 
+ * @interface cookieParser - A middleware for Express that allows for the use of cookies.
+ * @constant  {cookieParser}
+ * @author    LiquidZulu
+ */
 const cookieParser = require('cookie-parser');
-const md5          = require('./md5');
-const { argv }     = require('yargs')
-const app          = Express();
 
+/** 
+ * @interface md5          - A function to quickly calculate MD5 hashes, dont worry im not storing passwords with md5 just need a quick way to convert randy seed to a number.
+ * @constant  {md5} 
+ * @author    LiquidZulu
+ */
+const md5 = require('./md5');
+
+/** 
+ * @interface argv         - An object that holds formatted cli (@argv) arguments through the use of yargs.
+ * @constant  {argv} 
+ * @author    LiquidZulu
+ */
+const { argv } = require('yargs')
+
+/** 
+ * @interface app          - The current Express instance.
+ * @constant  {app} 
+ * @author    LiquidZulu
+ */
+const app = Express();
+
+/** 
+ * @constant  {Object} 
+ * @author    LiquidZulu
+ */
 const ENV = {
     port: argv.port || 8080,
     root: argv.root || "D:/_lz com/"
 }
+
+
+/**
+ * Generates a `randy` for a given seed.
+ * 
+ * @param   {String|Number}seed - The seed with which the randy is generated, should be crypto secure, user input recommended. 
+ * @returns {String}            - The produced randy
+ * @author  LiquidZulu
+ */
 
 function make_randy (seed){
 
@@ -35,9 +88,13 @@ function make_randy (seed){
         n += c.charCodeAt(0)
     }
 
-    return (1 / ( 1 + (Math.E**(-n)) ) )
+    return ( 1 / ( 1 + (Math.E**(-n)) ) )
 }
 
+
+/**
+ * @author LiquidZulu
+ */
 
 switch(typeof argv.randy){
     
@@ -67,7 +124,8 @@ switch(typeof argv.randy){
  * server.js is the index file to parse all requests sent to the server.
  * See LEGAL/LICENSE.md for more info.
  * 
- * @param {Object}ENV - Enviroment variables
+ * @param  {Object}ENV - Enviroment variables
+ * @author LiquidZulu
  */
 
 async function index(ENV){
@@ -78,6 +136,7 @@ async function index(ENV){
      * 
      * @param   {String}d - the request URI
      * @returns {String}  - The internal directory as defined by sitemap.json
+     * @author  LiquidZulu
      */
 
     function getDir(d){
@@ -127,6 +186,7 @@ async function index(ENV){
      * 
      * @param   {String}d                                        - the internal directory to get the file
      * @returns {Promise<File>|Promise<String>|Promise<HTTPerr>} - Either a {Promise<File>} in need of formatting, plaintext or {Promise<HTTPerr>}
+     * @author  LiquidZulu
      */
 
     async function getFile(d){
@@ -178,6 +238,7 @@ async function index(ENV){
      * @param   {Object}res               - res object from Express
      * @param   {Object}_DATA             - metadata to pass into {File} class
      * @returns {Promise<String>|String}  - Plaintext response, potentially promisified.
+     * @author  LiquidZulu
      */
 
     async function getResp(file, req, res, _DATA){
@@ -204,6 +265,7 @@ async function index(ENV){
      * @param   {Number}high - The highest possible value you want to return
      * @param   {Number}seed - the seed with which you want to generate the numbers, if none is passed in pi is used
      * @returns {Number}     - the resulting number
+     * @author  LiquidZulu
      */
 
     function RandInt(low, high, seed){
