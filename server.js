@@ -76,7 +76,7 @@ const ENV = {
         }
         return port;
     })(),
-    root: argv.root || "D:/_lz com/"
+    root: argv.root || __dirname
 }
 
 
