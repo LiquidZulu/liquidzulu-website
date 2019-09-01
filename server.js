@@ -68,9 +68,9 @@ const app = Express();
 const ENV = {
     port: (() => {
         let port = process.env.PORT;
-        if (port == null || port == "") {
-            let port = argv.port;
-            if (port == null || port == "") {
+        if (port === null || port === undefined || port === "") {
+            port = argv.port;
+            if (port === null || port === undefined || port === "") {
                 port = 8080;
             }
         }
