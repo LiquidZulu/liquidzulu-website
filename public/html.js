@@ -15,6 +15,12 @@ module.exports = class File {
                 <meta charset="utf-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="shortcut icon" type="image/png" href="./pics/face.logo/png"/>
+                <meta http-equiv="Content-Security-Policy" content="
+                    default-src 'self' 'unsafe-inline'; 
+                    script-src  'self' 'unsafe-inline'; 
+                    img-src     'self' data:; 
+                    font-src    'self' data:;"
+                />
                 
                 <link rel="stylesheet" type="text/css" href="./CreativeButtons/.css/default.css" />
                 <link rel="stylesheet" type="text/css" href="./CreativeButtons/.css/component.css" />

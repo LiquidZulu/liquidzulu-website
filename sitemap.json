@@ -48,6 +48,10 @@
         "/min.js": {
             "i":    "./wavesurfer-src/wavesurfer.min.js",
             "MIME": "text/javascript"
+        },
+        "/wavesurfer.min.js.map": {
+            "i":    "./wavesurfer-src/wavesurfer.min.js.map",
+            "MIME": "application/json"
         }
     },
 

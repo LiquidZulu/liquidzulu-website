@@ -17,7 +17,7 @@ var responses = require('./responses_collection.js');
  * @param {Number} response
  */
 
-module.exports = class errResponse {
+module.exports = class HTTPerr {
 
   /**
    * 
@@ -32,7 +32,7 @@ module.exports = class errResponse {
      * @type {integer}
      */
     
-    this.response = responses.find('code', response);
+    this.response = responses.find(val => val.code === response);
     
     
     /**

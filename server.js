@@ -8,6 +8,7 @@
  * @todo make css minifier recursively minify all files.
  * @todo finish adding music to music,js
  * @todo Add @argv to JSDoc
+ * @todo work out why CSP is fucked, added error passing to getResp
  */
 
 /**
@@ -29,37 +30,37 @@ const HTTPerr = require('./err/error_response.js');
 /** 
  * @interface Express      - A Function that allows for interacting with the Express module.
  * @constant  {Express} 
- * @author    LiquidZulu
  */
 const Express = require('express');
 
 /** 
  * @interface cookieParser - A middleware for Express that allows for the use of cookies.
  * @constant  {cookieParser}
- * @author    LiquidZulu
  */
 const cookieParser = require('cookie-parser');
 
 /** 
  * @interface md5          - A function to quickly calculate MD5 hashes, dont worry im not storing passwords with md5 just need a quick way to convert randy seed to a number.
  * @constant  {md5} 
- * @author    LiquidZulu
  */
 const md5 = require('./md5');
 
 /** 
  * @interface argv         - An object that holds formatted cli (@argv) arguments through the use of yargs.
  * @constant  {argv} 
- * @author    LiquidZulu
  */
 const { argv } = require('yargs')
 
 /** 
  * @interface app          - The current Express instance.
  * @constant  {app} 
- * @author    LiquidZulu
  */
 const app = Express();
+
+/**
+ * @constant {Object}
+ */
+const path = require('path');
 
 /** 
  * @constant  {Object} 
@@ -76,7 +77,7 @@ const ENV = {
         }
         return port;
     })(),
-    root: argv.root || __dirname
+    root: __dirname
 }
 
 
@@ -159,7 +160,7 @@ async function index(ENV){
 
         try{
 
-            for(i of uri){
+            for(let i of uri){
                 if(i.length > 0){
                     if(typeof index['/*'] == 'undefined'){
                         index = index[`/${i}`]
@@ -193,8 +194,8 @@ async function index(ENV){
     /**
      * Returns either a {Promise<File>} class or plaintext for non formatted responses.
      * 
-     * @param   {String}d                                        - the internal directory to get the file
-     * @returns {Promise<File>|Promise<String>|Promise<HTTPerr>} - Either a {Promise<File>} in need of formatting, plaintext or {Promise<HTTPerr>}
+     * @param   {String}d  - the internal directory to get the file
+     * @returns {Object}   - Object containing either a {Promise<File>} in need of formatting, plaintext or {Promise<HTTPerr>} in prototype.file
      * @author  LiquidZulu
      */
 
@@ -205,9 +206,9 @@ async function index(ENV){
             case (typeof ''):{
                 {
                     try{
-                        return require(d);
+                        return { file:require(d) };
                     }catch(e){
-                        return fs.readFileSync(d, 'utf8')
+                        return { file:fs.readFileSync(d, 'utf8') };
                     }
                 }
             } 
@@ -216,7 +217,7 @@ async function index(ENV){
                 {
                     let page = new HTTPerr(d)
                     let toreturn = await page.genErrPage()
-                    return toreturn
+                    return { file:toreturn, err:d }
                 }
             }
 
@@ -224,7 +225,7 @@ async function index(ENV){
                 {
                     let page = new HTTPerr(404)
                     let toreturn = await page.genErrPage()
-                    return toreturn
+                    return { file:toreturn, err:404 }
                 }
             }
 
@@ -232,7 +233,7 @@ async function index(ENV){
                 {
                     let page = new HTTPerr('5xx')
                     let toreturn = await page.genErrPage()
-                    return toreturn
+                    return { file:toreturn, err:'5xx' }
                 }
             }
         }
@@ -252,17 +253,17 @@ async function index(ENV){
 
     async function getResp(file, req, res, _DATA){
         try{
-            let resp = new file({
+            let resp = new file.file({
                 url: req.originalUrl,
                 data: _DATA,
                 req: req,
                 res: res
             })
             await resp.load()
-            return resp.html
+            return {resp:resp.html, err:file.err}
         }catch(e){
-            let resp = file
-            return resp
+            let resp = file.file
+            return { resp:resp, err:file.err }
         }
     }
 
@@ -308,17 +309,13 @@ async function index(ENV){
         let dir = getDir(splitReq[0])
 
         if(dir['MIME'] == 'text/html'){
-            let file = await getFile(dir['i'])
-
-            resp = await getResp(file, req, res, splitReq[1]);
-            res.send(resp)
+            res.send((await getResp(await getFile(dir['i']), req, res, splitReq[1])).resp)
         }else{
             try{
-                res.sendFile(dir['i'], {root: ENV.root})
+                res.sendFile(dir['i'], {root: ENV.root, headers: {'Content-Security-Policy': `default-src 'self'; script-src 'self'`}})
             }catch(e){
                 try{
-                    let file = await getFile(dir['i'])
-                    res.send(file)
+                    res.send((await getFile(dir['i'])).file)
                 }catch(e){
                     res.send('Critical error')
                 }
