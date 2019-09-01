@@ -1,8 +1,10 @@
 {
   "scripts": {
     "start": "node server.js",
-    "css-build": "node ./build-css.js"
+    "css-build": "node ./build-css.js",
+    "build-docs": "jsdoc server.js -c ./docs/.jsdoc/conf.json"
   },
+  "main": "server.js",
   "name": "liquidzulu.xyz",
   "version": "0.0.1",
   "dependencies": {
@@ -12,5 +14,8 @@
     "express": "^4.17.0",
     "node-sass": "^4.12.0",
     "uglify-js": "^3.6.0"
+  },
+  "engines": {
+    "node": "11.13.0"
   }
 }

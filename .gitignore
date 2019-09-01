@@ -1,2 +1,8 @@
 #data
 data/
+
+#heroku
+/node_modules
+npm-debug.log
+.DS_Store
+/*.env

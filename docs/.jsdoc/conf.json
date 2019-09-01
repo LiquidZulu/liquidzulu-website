@@ -1,0 +1,38 @@
+{
+    "plugins": ["plugins/markdown"],
+    "recurseDepth": 128,
+
+    "source": {
+        "include": [ 
+            "./build-css.js",
+            "./Collection.js",
+            "./server.js",
+            "./sitemap.json",
+            "./public/html.js",
+            "./public/music/html.js",
+            "./public/social/html.js"
+        ],
+        "includePattern": ".+\\.js(doc|x)?$",
+        "excludePattern": ""
+    },
+
+    "sourceType": "module",
+
+    "tags": {
+        "allowUnknownTags": true,
+        "dictionaries": ["jsdoc","closure"]
+    },
+
+    "templates": {
+        "cleverLinks": false,
+        "monospaceLinks": false
+    },
+
+    "opts": {
+        "template": "D:\\Programming\\ink-docstrap\\node_modules\\ink-docstrap\\template",
+        "encoding": "utf8",
+        "destination": "./docs/",
+        "recurse": true,
+        "readme": "README.md"
+    }
+}

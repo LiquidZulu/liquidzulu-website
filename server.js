@@ -66,7 +66,16 @@ const app = Express();
  * @author    LiquidZulu
  */
 const ENV = {
-    port: argv.port || 8080,
+    port: (() => {
+        let port = process.env.PORT;
+        if (port == null || port == "") {
+            let port = argv.port;
+            if (port == null || port == "") {
+                port = 8080;
+            }
+        }
+        return port;
+    })(),
     root: argv.root || "D:/_lz com/"
 }
 
