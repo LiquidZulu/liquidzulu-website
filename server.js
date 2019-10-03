@@ -20,6 +20,22 @@
 
 "use strict"
 
+const ERR_NO_ERR          = 0
+const ERR_COMIC_NOT_FOUND = 600
+
+const MIME_UNDEFINED      = 0x00
+const MIME_UNKNOWN        = 0x01
+const MIME_XML            = 0x02
+const MIME_GIF            = 0x03
+const MIME_PNG            = 0x04
+const MIME_JPEG           = 0x04
+
+const MIME_MAPPER         = [undefined, 'err/UNKNOWN', 'application/XML', 'image/GIF', 'img/PNG', 'image/JPEG']
+
+const CDN_UNDEFINED       = 0x00
+const CDN_CLOUDFRONT      = 0x01
+const CDN_GOCOMICS        = 0x02
+
 /** 
  * @interface HTTPerr      - A Class that holds info on a HTTP error.
  * @constant  {HTTPerr} 
@@ -66,19 +82,8 @@ const path = require('path');
  * @constant  {Object} 
  * @author    LiquidZulu
  */
-const ENV = {
-    port: (() => {
-        let port = process.env.PORT;
-        if (port === null || port === undefined || port === "") {
-            port = argv.port;
-            if (port === null || port === undefined || port === "") {
-                port = 8080;
-            }
-        }
-        return port;
-    })(),
-    root: __dirname
-}
+const ENV = new (require('./util/ENV.js'))({argv: argv});
+process.env.ENV = ENV;
 
 
 /**
@@ -252,16 +257,19 @@ async function index(ENV){
      */
 
     async function getResp(file, req, res, _DATA){
+        
         try{
             let resp = new file.file({
                 url: req.originalUrl,
                 data: _DATA,
                 req: req,
-                res: res
+                res: res,
+                ENV: ENV
             })
             await resp.load()
-            return {resp:resp.html, err:file.err}
+            return {resp:resp.html, err:file.err, MIME:resp.MIME||undefined}
         }catch(e){
+            console.log(e)
             let resp = file.file
             return { resp:resp, err:file.err }
         }
@@ -302,6 +310,23 @@ async function index(ENV){
 
     const port = ENV.port;
     const fs = require('fs')
+
+    app.get('/GDN/*', async (req, res) => {
+
+        try{
+            let GDNloc = req.originalUrl.search('/GDN/');
+            let date = req.originalUrl.substring(GDNloc+5, GDNloc+15).split('-')
+    
+            let resp = (await getResp({file: require('./GDN/deliver.js')}, req, res, date))
+            console.log(resp.MIME)
+            res.MIME = MIME_MAPPER[resp.MIME]
+            res.set('Content-Type', MIME_MAPPER[resp.MIME])
+            res.send(resp.resp)
+        }catch(e){
+            console.error(e)
+        }
+
+    })
 
     app.get('/*', async (req, res) => {
 

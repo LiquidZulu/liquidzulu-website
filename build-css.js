@@ -4,7 +4,7 @@ const csso     = require('csso');
 const fs       = require('fs');
 const { argv } = require('yargs');
 
-const cssLoc  = argv.css  || './public/css/main.min.css'
+const cssLoc  = argv.css  || './css/main.min.css'
 const scssLoc = argv.scss || './sass/mystyles.scss'
 
 try{

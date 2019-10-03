@@ -47,7 +47,19 @@ const ready = e => {
             Her memory a fickle thing, the strongest shall endure; when her weeping starts to waver, the drugs make her mind pure.`,
             "genre":       "Algorithmcore",
             "tags":        [],
-            "src-format":  "zip"
+            "src-format":  "zip",
+            "songs": [
+                {
+                    "title": "Michael, the Warrior Angel",
+                    "uri-title": "michael-the-warrior-angel",
+                    "classes": "spaced-text light-text",
+                    "META": {
+                        "LICENSE":     "CC BY-NC-SA 3.0 | https://creativecommons.org/licenses/by-nc-sa/3.0/",
+                        "source":      true,
+                        "formats":     ["wav", "mp3"]    
+                    }
+                }
+            ]
         }
     ]
 
@@ -64,7 +76,8 @@ const ready = e => {
                 "LICENSE":     "CC BY-NC-SA 3.0 | https://creativecommons.org/licenses/by-nc-sa/3.0/",
                 "source":      true,
                 "formats":     ["flac", "wav"]    
-            }
+            },
+            "type": "song"
         },
         {
             "title": "Decade Decaf",
@@ -78,7 +91,8 @@ const ready = e => {
                 "LICENSE":     "CC BY-NC-SA 3.0 | https://creativecommons.org/licenses/by-nc-sa/3.0/",
                 "source":      true,
                 "formats":     ["flac", "mp3"]    
-            }
+            },
+            "type": "song"
         },
         {
             "title": "Ahab",
@@ -92,22 +106,16 @@ const ready = e => {
                 "LICENSE":     "CC BY-NC-SA 3.0 | https://creativecommons.org/licenses/by-nc-sa/3.0/",
                 "source":      true,
                 "formats":     ["flac", "mp3", "ogg"]    
-            }
+            },
+            "type": "song"
         },
         {
-            "title": "Michael, the Warrior Angel",
-            "uri-title": "michael-the-warrior-angel",
-            "classes": "spaced-text light-text",
-            "album": ".archangel",
-            "META": {
-                "LICENSE":     "CC BY-NC-SA 3.0 | https://creativecommons.org/licenses/by-nc-sa/3.0/",
-                "source":      true,
-                "formats":     ["wav", "mp3"]    
-            }
+            "type": "album",
+            "album": ALBUM_ARCHANGEL
         }
     ];
 
-    const N_SONGS = 1;
+    const N_SONGS = 4;
 
     document.lz_song.songs = new Array(N_SONGS);
     document.wavesurfer    = new Array(N_SONGS);

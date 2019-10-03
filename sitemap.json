@@ -65,6 +65,16 @@
         "MIME": "text/html"
     },
 
+    "/GDN": {
+        "i":    "./GDN/deliver.js",
+        "MIME": "image/gif"
+    },
+
+    "/contact": {
+        "i":    "./public/contact/html.js",
+        "MIME": "text/html"
+    },
+
     "/songs": {
         
         "/rage-room": {
