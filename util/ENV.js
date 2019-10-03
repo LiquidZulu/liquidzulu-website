@@ -1,7 +1,7 @@
 const dir  = __dirname
 const desc = `On this website you will find documentation for my programs, my music and anything else I make. I am the owner of The First Church of Garfield and a moderator of r/LasagnaCat. I spend most of my free time programming (mostly Garfield based things and making music. When I'm not doing that I am completing a BSc in Physics and Mathematics, I plan to become a tenured physics professor one day.`
 const keys = `Liquid,Zulu,LiquidZulu,liquidzulu,nodejs,node.js,node,heroku,njalla,soundcloud,sc,JavaScript,js,java script,Garfield,Garf,Garfield Comics,Bot,Garfield Comics Bot,garfield-comics,First,Church,of,Garfield,First Church of Garfield,Discord,Server,Nitro`
-const pic  = `http://liquidzulu.xyz/pics/face.logo/svg`
+const pic  = `http://liquidzulu.xyz/pics/face.logo`
 
 module.exports = class {
     constructor(ARGS){
@@ -31,7 +31,7 @@ module.exports = class {
                 <!-- Facebook Open Graph -->
 
                     <meta name="og:description" content="${desc}" />
-                    <meta name="og:image" content="${pic}" />
+                    <meta name="og:image" content="${pic}/png" />
                     <meta name="og:type" content="website" />
                     <meta name="og:site_name" content="liquidzulu.xyz" />
 
@@ -43,12 +43,12 @@ module.exports = class {
                     <meta name="twitter:site" content="liquidzulu.xyz">
                     <meta name="twitter:creator" content="@LiquidZulu">
                     <meta name="twitter:description" content="${desc}">
-                    <meta name="twitter:image" content="${pic}">
+                    <meta name="twitter:image" content="${pic}/png">
 
                 <!-- Twitter Card Tags -->
 
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <link rel="shortcut icon" type="image/png" href="${pic}"/>
+                <link rel="shortcut icon" type="image/png" href="${pic}/png"/>
                 <meta http-equiv="Content-Security-Policy" content="
                     default-src 'self' 'unsafe-inline'; 
                     script-src  'self' 'unsafe-inline'; 
