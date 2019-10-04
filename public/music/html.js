@@ -69,7 +69,7 @@ module.exports = class File {
 
                         <a href='./'><img src='./pics/face.logo/svg'></a>
                         <h1>My Music WIP (CURRENTLY BROKEN</h1>
-                        <h2>This page is where you can listen to the music I make, also availible <a href='https://soundcloud.com/liquidzulu'>on SoundCloud</a>.</h2>
+                        <h2>This page is where you can listen to the music I make, also available <a href='https://soundcloud.com/liquidzulu'>on SoundCloud</a>.</h2>
 
                     </section>
 
