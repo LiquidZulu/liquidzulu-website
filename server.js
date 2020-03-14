@@ -18,6 +18,24 @@
  * @argv {Number}randy-len    - the length that the final generated randy should be, defaults to 1024
  */
 
+/**
+ * https://remysharp.com/2014/05/23/where-is-that-console-log
+ * @author remysharp
+ */
+
+['log', 'warn'].forEach(function(method) {
+    var old = console[method];
+    console[method] = function() {
+      var stack = (new Error()).stack.split(/\n/);
+      // Chrome includes a single "Error" line, FF doesn't.
+      if (stack[0].indexOf('Error') === 0) {
+        stack = stack.slice(1);
+      }
+      var args = [].slice.apply(arguments).concat([stack[1].trim()]);
+      return old.apply(console, args);
+    };
+});
+
 "use strict"
 
 const ERR_NO_ERR          = 0
@@ -28,7 +46,7 @@ const MIME_UNKNOWN        = 0x01
 const MIME_XML            = 0x02
 const MIME_GIF            = 0x03
 const MIME_PNG            = 0x04
-const MIME_JPEG           = 0x04
+const MIME_JPEG           = 0x05
 
 const MIME_MAPPER         = [undefined, 'err/UNKNOWN', 'application/XML', 'image/GIF', 'img/PNG', 'image/JPEG']
 
@@ -318,7 +336,6 @@ async function index(ENV){
             let date = req.originalUrl.substring(GDNloc+5, GDNloc+15).split('-')
     
             let resp = (await getResp({file: require('./GDN/deliver.js')}, req, res, date))
-            console.log(resp.MIME)
             res.MIME = MIME_MAPPER[resp.MIME]
             res.set('Content-Type', MIME_MAPPER[resp.MIME])
             res.send(resp.resp)

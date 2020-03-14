@@ -1,6 +1,5 @@
 const got = require('got');
 
-
 const ERR_NO_ERR          = 000
 const ERR_COMIC_NOT_FOUND = 600
 
@@ -13,7 +12,9 @@ const MIME_JPEG           = 0x04
 
 const CDN_UNDEFINED       = 0x00
 const CDN_CLOUDFRONT      = 0x01
-const CDN_GOCOMICS        = 0x02
+const CDN_IIMAGES         = 0x02
+const CDN_GOCOMICS        = 0x03
+const CDN_FINISH          = 0xff
 
 module.exports = class File {
 
@@ -24,14 +25,18 @@ module.exports = class File {
         this.comic = {
             err:  ERR_NO_ERR,
             MIME: MIME_UNDEFINED,
-            CDN:  CDN_UNDEFINED
+            CDN:  CDN_UNDEFINED,
+            res:  {}
         };
     }
 
     async load() {
-        this.comic.res = await this.getComic(CDN_CLOUDFRONT); // this doesnt wait
+        this.comic.res = await this.getComic(CDN_CLOUDFRONT);
+        console.log('Working')
         this.html = this.comic.res.body
+        console.log('Working')
         this.MIME = this.comic.MIME
+        console.log('Working')
         return;
     } 
 
@@ -52,19 +57,18 @@ module.exports = class File {
                             case 'text/xml':{
                                 {
                                     this.comic.MIME = MIME_XML
-                                    return this.getComic(CDN_GOCOMICS);
+                                    return this.getComic(CDN_IIMAGES);
                                 }
                                 break;
                             }
                 
                             case 'image/gif':{
                                 {
-                                    this.comic.MIME = MIME_GIF
-                                    this.comic.CDN  = CDN_CLOUDFRONT
-                                    this.comic.res  = cloudfront
-                                    return new Promise(resolve => {
-                                        resolve(this.comic.res)
-                                    });
+                                    this.comic.MIME  = MIME_GIF
+                                    this.comic.CDN   = CDN_CLOUDFRONT
+                                    //console.log(typeof cloudfront)
+                                    this.comic.return = cloudfront
+                                    this.getComic(CDN_FINISH)
                                 }
                                 break;
                             }
@@ -74,9 +78,59 @@ module.exports = class File {
                                     this.comic.MIME = MIME_PNG
                                     this.comic.CDN  = CDN_CLOUDFRONT
                                     this.comic.res  = cloudfront
-                                    return new Promise(resolve => {
-                                        resolve(this.comic.res)
-                                    });
+                                    this.getComic(CDN_FINISH)
+                                }
+                                break;
+                            }
+                
+                            default:{
+                                {
+                                    return this.getComic(CDN_IIMAGES);
+                                }
+                            }
+                        }
+                    }catch(e){
+                        this.getComic(CDN_IIMAGES)
+                    }
+                    
+                }
+                break;
+            }
+
+            case CDN_IIMAGES:{
+                {
+                    try{
+                        let iimages = await got(
+                            `http://strips.garfield.com/iimages1200/${this.date[0]}/ga${this.date[0][2]}${this.date[0][3]}${this.date[1]}${this.date[3]}.gif`
+                        )
+                
+                        switch(iimages.headers['content-type']){
+                
+                            case 'application/xml':
+                            case 'text/xml':{
+                                {
+                                    this.comic.MIME = MIME_XML
+                                    return this.getComic(CDN_GOCOMICS);
+                                }
+                                break;
+                            }
+                
+                            case 'image/gif':{
+                                {
+                                    this.comic.MIME = MIME_GIF
+                                    this.comic.CDN  = CDN_IIMAGES
+                                    this.comic.res  = iimages
+                                    this.getComic(CDN_FINISH)
+                                }
+                                break;
+                            }
+                
+                            case 'image/png':{
+                                {
+                                    this.comic.MIME = MIME_PNG
+                                    this.comic.CDN  = CDN_IIMAGES
+                                    this.comic.res  = iimages
+                                    this.getComic(CDN_FINISH)
                                 }
                                 break;
                             }
@@ -90,7 +144,6 @@ module.exports = class File {
                     }catch(e){
                         this.getComic(CDN_GOCOMICS)
                     }
-                    
                 }
                 break;
             }
@@ -115,9 +168,7 @@ module.exports = class File {
                                 this.comic.MIME = MIME_GIF
                                 this.comic.CDN  = CDN_GOCOMICS
                                 this.comic.res  = amuniversal
-                                return new Promise(resolve => {
-                                    resolve(this.comic.res)
-                                });
+                                this.getComic(CDN_FINISH)
                             }
                             break;
                         }
@@ -127,9 +178,7 @@ module.exports = class File {
                                 this.comic.MIME = MIME_PNG
                                 this.comic.CDN  = CDN_GOCOMICS
                                 this.comic.res  = amuniversal
-                                return new Promise(resolve => {
-                                    resolve(this.comic.res)
-                                });
+                                this.getComic(CDN_FINISH)
                             }
                             break;
                         }
@@ -139,15 +188,21 @@ module.exports = class File {
                                 this.comic.MIME = MIME_JPEG
                                 this.comic.CDN  = CDN_GOCOMICS
                                 this.comic.res  = amuniversal
-                                return new Promise(resolve => {
-                                    resolve(this.comic.res)
-                                });
+                                this.getComic(CDN_FINISH)
                             }
                             break;
                         }
                     }
                 }
                 break;
+            }
+
+            case CDN_FINISH:{
+                {
+                    console.log('Working')
+                    console.log(this.comic.return)
+                    return this.comic.return
+                }
             }
         }
 

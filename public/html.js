@@ -65,6 +65,13 @@ module.exports = class File {
 
                     </section>
 
+                    <section id='section-5' class='section color-5 spaced-text light-text'>
+
+                        <h1>Donate</h1>
+                        <h2>If you want to give me money do that <nav class="cl-effect-9" id="cl-effect-9"><a href='./donate'>here</a></nav>.</h2>
+
+                    </section>
+
                     ${this.ENV.body.footer}
 
                 </div>

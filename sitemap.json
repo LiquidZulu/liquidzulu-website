@@ -2,6 +2,23 @@
     "i":    "./public/html.js",
     "MIME": "text/html",
 
+    "/donate": {
+
+        "i":    "./public/donate/html.js",
+        "MIME": "text/html",
+
+        "/crypto": {
+
+            "i":    "./public/donate/crypto.js",
+            "MIME": "text/html",
+
+            "/json": {
+                "i":    "./public/donate/crypto.json",
+                "MIME": "application/json"
+            }
+        }
+    },
+
     "/css": {
 
         "/css.main": {
