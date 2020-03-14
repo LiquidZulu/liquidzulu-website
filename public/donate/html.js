@@ -40,7 +40,7 @@ module.exports = class File {
                     <section id='section-1' class='section color-1 spaced-text light-text'>
 
                         <h1>Cryptocurrency Wallets</h1>
-                        <h2>A list of some of my crypto wallet addresses is <nav class="cl-effect-9" id="cl-effect-9"><a href='./crypto'>here</a></nav> and if you want to automate it a JSON version is <nav class="cl-effect-9" id="cl-effect-9"><a href='./crypto/json'>here</a></nav>.</h2>
+                        <h2>A list of some of my crypto wallet addresses is <nav class="cl-effect-9" id="cl-effect-9"><a href='/donate/crypto'>here</a></nav> and if you want to automate it a JSON version is <nav class="cl-effect-9" id="cl-effect-9"><a href='/donate/crypto/json'>here</a></nav>.</h2>
 
                     </section>
 
