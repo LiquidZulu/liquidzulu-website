@@ -174,5 +174,10 @@
         "/*": {
             "MIME": ""
         }
+    },
+
+    "/instant.page": {
+        "i":    "./js/instant.page.js",
+        "MIME": "text/javascript"
     }
 }

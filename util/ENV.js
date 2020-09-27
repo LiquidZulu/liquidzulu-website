@@ -82,11 +82,11 @@ module.exports = class {
                     <p>
                         <strong>liquidzulu.xyz</strong> is <a href='https://github.com/LiquidZulu/liquidzulu-website'>open source</a> and licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.<br/>
                         This website employs no trackers as far as I'm aware but they are very sneaky these days so if you find one embedded in one of the modules used then please <a href='/contact'>let me know</a>.<br/>
-                        Frontend made with <a href='https://bulma.io'>Bulma CSS</a>, <a href='https://tympanus.net/Development/CreativeButtons/'>CreativeButtons</a>, <a href='https://tympanus.net/Development/CreativeLinkEffects/'>CreativeLinkEffects</a>, <a href='https://www.cssscript.com/demo/stylish-custom-scrollbar-pure-javascript-minibar/'>MiniBar</a> and <a href='http://wavesurfer-js.org/'>WaveSurfer</a>.<br/>
+                        Frontend made with <a href='https://bulma.io'>Bulma CSS</a>, <a href='https://tympanus.net/Development/CreativeButtons/'>CreativeButtons</a>, <a href='https://tympanus.net/Development/CreativeLinkEffects/'>CreativeLinkEffects</a>, <a href='https://www.cssscript.com/demo/stylish-custom-scrollbar-pure-javascript-minibar/'>MiniBar</a>, <a href='https://instant.page/'>instant.page</a> and <a href='http://wavesurfer-js.org/'>WaveSurfer</a>.<br/>
                         Backend has many npm dependencies and they can be seen <a href='https://github.com/LiquidZulu/liquidzulu-website/blob/master/package.json'>here</a>.
                     </p>
                 </div>
-            </footer>`
+            </footer><script src="/instant.page" type="module" integrity="sha384-by67kQnR+pyfy8yWP4kPO12fHKRLHZPfEsiSXR8u2IKcTdxD805MGUXBzVPnkLHw"></script>`
         }
     }
 }
