@@ -25,7 +25,7 @@ module.exports = class File {
         
             </head>
         
-            <body>
+            <body data-instant-intensity="viewport-all">
 
                 <div class='container' id='container'>
 
@@ -54,6 +54,7 @@ module.exports = class File {
                     ${this.ENV.body.footer}
 
                 </div>
+                <script src="/instant.page" type="module" integrity="sha384-by67kQnR+pyfy8yWP4kPO12fHKRLHZPfEsiSXR8u2IKcTdxD805MGUXBzVPnkLHw"></script>
                 
             </body>
         

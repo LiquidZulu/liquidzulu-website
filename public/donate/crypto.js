@@ -34,7 +34,7 @@ module.exports = class File {
 
             </head>
         
-            <body>
+            <body data-instant-intensity="viewport-all">
                 
                 <table>
 
@@ -88,6 +88,7 @@ module.exports = class File {
                     </tr>
 
                 </table>
+                <script src="/instant.page" type="module" integrity="sha384-by67kQnR+pyfy8yWP4kPO12fHKRLHZPfEsiSXR8u2IKcTdxD805MGUXBzVPnkLHw"></script>
 
             </body>
         

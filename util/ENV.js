@@ -86,7 +86,7 @@ module.exports = class {
                         Backend has many npm dependencies and they can be seen <a href='https://github.com/LiquidZulu/liquidzulu-website/blob/master/package.json'>here</a>.
                     </p>
                 </div>
-            </footer><script src="/instant.page" type="module" integrity="sha384-by67kQnR+pyfy8yWP4kPO12fHKRLHZPfEsiSXR8u2IKcTdxD805MGUXBzVPnkLHw"></script>`
+            </footer>`
         }
     }
 }
