@@ -14,7 +14,7 @@
     "express": "^4.17.0",
     "got": "^9.6.0",
     "minimist": "^1.2.5",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "uglify-js": "^3.6.0"
   },
   "engines": {
