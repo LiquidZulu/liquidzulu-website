@@ -12,7 +12,7 @@
     "cookie-parser": "^1.4.4",
     "csso": "^3.5.1",
     "express": "^4.17.0",
-    "got": "^9.6.0",
+    "got": "^11.8.5",
     "minimist": "^1.2.5",
     "node-sass": "^4.13.1",
     "uglify-js": "^3.6.0"
